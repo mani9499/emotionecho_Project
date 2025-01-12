@@ -1,0 +1,12 @@
+:root {
+  --lightprimary-color: #049aff;
+  --darkprimary-color: rgb(66, 66, 66);
+  --secondary-color: #2ecc71;
+  --font-color: white;
+  --font-size-base: 16px;
+  --font-family: "Arial, sans-serif";
+}
+body {
+  background-color: var(--lightprimary-color);
+  color: var(--font-color);
+}

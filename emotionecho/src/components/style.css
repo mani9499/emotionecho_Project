@@ -5,6 +5,15 @@
 .player img {
   max-width: 100px;
 }
+ul {
+  list-style-type: none;
+}
+.active-song {
+  border: 1px solid black;
+}
+.inactive-song {
+  border: 2px solid white;
+}
 .controls-container {
   display: flex;
   flex-direction: column;
@@ -20,4 +29,9 @@
   font-size: 1.5rem;
   background-color: transparent;
   border: 0;
+}
+.time-display {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
 }
