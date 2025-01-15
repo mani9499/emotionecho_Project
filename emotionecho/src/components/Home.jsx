@@ -3,22 +3,27 @@ import axios from "axios";
 import "./style.css";
 
 export default function Home() {
-  const [isPlaying, setPlay] = useState(false);
+  const [isPlaying, setPlay] = useState(false); 
   const [musicData, setMusicList] = useState([]);
   const [audio, setAudio] = useState(null);
-  const [mood,setmood]=useState("happy");
+  const [mood, setMood] = useState("happy"); 
   const [currentSong, setCurrentSong] = useState(null);
-  const [duration, setDuration] = useState(0);
+  const [duration, setDuration] = useState(0); 
   const [currentTime, setCurrentTime] = useState(0);
+
+  const moodOptions = {
+    happy: "ri-emotion-laugh-fill",
+    sad: "ri-emotion-sad-fill",
+    angry: "ri-fire-line",
+    relaxed: "ri-emotion-happy-fill",
+  };
 
   useEffect(() => {
     axios
-      .get("http://localhost:3000/music/happy")
+      .get(`http://localhost:3000/music/${mood}`)
       .then((response) => setMusicList(response.data))
-      .catch((err) => {
-        console.error("Error fetching music list:", err);
-      });
-  }, []);
+      .catch((err) => console.error("Error fetching music list:", err));
+  }, [mood]);
 
   const playMusic = (fileName) => {
     const songURL = `http://localhost:3000/music/${mood}/${encodeURIComponent(fileName)}`;
@@ -28,29 +33,18 @@ export default function Home() {
       audio.currentTime = 0; 
     }
 
-    const newAudio = new Audio(songURL);
-    setAudio(newAudio);
+    const newAudio = new Audio(songURL); 
+    setAudio(newAudio); 
     setCurrentSong(fileName);
 
-    newAudio.play()
-      .then(() => {
-        setPlay(true);
-      })
-      .catch((error) => {
-        console.error("Error playing audio:", error);
-      });
+    newAudio
+      .play()
+      .then(() => setPlay(true)) 
+      .catch((error) => console.error("Error playing audio:", error));
 
-    newAudio.onloadedmetadata = () => {
-      setDuration(newAudio.duration);
-    };
-
-    newAudio.ontimeupdate = () => {
-      setCurrentTime(newAudio.currentTime);
-    };
-
-    newAudio.onended = () => {
-      setPlay(false);
-    };
+    newAudio.onloadedmetadata = () => setDuration(newAudio.duration);
+    newAudio.ontimeupdate = () => setCurrentTime(newAudio.currentTime);
+    newAudio.onended = () => setPlay(false); 
   };
 
   const togglePlayPause = () => {
@@ -81,18 +75,38 @@ export default function Home() {
 
   return (
     <div className="Home">
+      <div className="mood-selector">
+        <h2>Select Mood</h2>
+        <select
+          value={mood}
+          onChange={(e) => setMood(e.target.value)}
+          className="mood-dropdown"
+        >
+          {Object.keys(moodOptions).map((key) => (
+            <option key={key} value={key}>
+              {key}
+            </option>
+          ))}
+        </select>
+        <i className={`${moodOptions[mood]}`}></i>
+      </div>
+
       <div className="home-main">
         <h2>Music List</h2>
         <ul>
-          {musicData.map((file, index) => (
-            <li
-              key={index}
-              onClick={() => playMusic(file)}
-              className={currentSong === file ? "active-song" : "inactive-song"}
-            >
-              {file.split('.')[0]}
-            </li>
-          ))}
+          {musicData.length === 0 ? (
+            <p>No songs available for this mood.</p>
+          ) : (
+            musicData.map((file, index) => (
+              <li
+                key={index}
+                onClick={() => playMusic(file)}
+                className={currentSong === file ? "active-song" : "inactive-song"}
+              >
+                {file.split(".")[0]}
+              </li>
+            ))
+          )}
         </ul>
       </div>
 
@@ -102,7 +116,7 @@ export default function Home() {
           alt="Player"
         />
         <div className="controls-container">
-          {currentSong && <p>{currentSong}</p>}
+          {currentSong && <p>{currentSong.split(".")[0]}</p>}
           <div className="timeline-container">
             <input
               type="range"
@@ -122,7 +136,7 @@ export default function Home() {
               <i className="ri-skip-back-fill"></i>
             </button>
             <button onClick={togglePlayPause}>
-              <i className={`ri-${isPlaying ? "pause-circle" : "play-circle"}-fill`}></i>
+              <i className={`ri-${isPlaying ? "pause-line" : "play-fill"}`}></i>
             </button>
             <button>
               <i className="ri-skip-forward-fill"></i>

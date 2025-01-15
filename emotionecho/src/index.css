@@ -1,12 +1,19 @@
 :root {
-  --lightprimary-color: #049aff;
-  --darkprimary-color: rgb(66, 66, 66);
-  --secondary-color: #2ecc71;
-  --font-color: white;
+  --dark-bg-color: #121212; /* Rich dark background */
+  --light-text-color: #e0e0e0; /* Light text for readability */
+  --primary-accent-color: #1db954; /* Vibrant green (Spotify-like) */
+  --secondary-accent-color: #f06292; /* Complementary pink */
+  --neutral-gray-color: #333333; /* Slightly lighter dark shade for cards/containers */
+  --hover-color: #1ed760; /* Brighter green for hover effects */
   --font-size-base: 16px;
-  --font-family: "Arial, sans-serif";
+  --font-family: "Poppins, sans-serif";
 }
+
 body {
-  background-color: var(--lightprimary-color);
-  color: var(--font-color);
+  background-color: var(--dark-bg-color);
+  color: var(--light-text-color);
+  font-family: var(--font-family);
+  font-size: var(--font-size-base);
+  margin: 0;
+  padding: 0;
 }
