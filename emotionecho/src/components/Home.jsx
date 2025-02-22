@@ -1,16 +1,18 @@
 import React, { useEffect, useState } from "react";
+import { useLocation } from "react-router-dom";
 import axios from "axios";
 import "./style.css";
 
 export default function Home() {
-  const [isPlaying, setPlay] = useState(false); 
+  const [isPlaying, setPlay] = useState(false);
   const [musicData, setMusicList] = useState([]);
   const [audio, setAudio] = useState(null);
-  const [mood, setMood] = useState("happy"); 
+  const [mood, setMood] = useState("happy");
   const [currentSong, setCurrentSong] = useState(null);
-  const [duration, setDuration] = useState(0); 
+  const [duration, setDuration] = useState(0);
   const [currentTime, setCurrentTime] = useState(0);
-
+  const location = useLocation();
+  const user = location.state?.user || JSON.parse(localStorage.getItem("user"));
   const moodOptions = {
     happy: "ri-emotion-laugh-fill",
     sad: "ri-emotion-sad-fill",
@@ -26,25 +28,27 @@ export default function Home() {
   }, [mood]);
 
   const playMusic = (fileName) => {
-    const songURL = `http://localhost:3000/music/${mood}/${encodeURIComponent(fileName)}`;
+    const songURL = `http://localhost:3000/music/${mood}/${encodeURIComponent(
+      fileName
+    )}`;
 
     if (audio) {
       audio.pause();
-      audio.currentTime = 0; 
+      audio.currentTime = 0;
     }
 
-    const newAudio = new Audio(songURL); 
-    setAudio(newAudio); 
+    const newAudio = new Audio(songURL);
+    setAudio(newAudio);
     setCurrentSong(fileName);
 
     newAudio
       .play()
-      .then(() => setPlay(true)) 
+      .then(() => setPlay(true))
       .catch((error) => console.error("Error playing audio:", error));
 
     newAudio.onloadedmetadata = () => setDuration(newAudio.duration);
     newAudio.ontimeupdate = () => setCurrentTime(newAudio.currentTime);
-    newAudio.onended = () => setPlay(false); 
+    newAudio.onended = () => setPlay(false);
   };
 
   const togglePlayPause = () => {
@@ -76,6 +80,7 @@ export default function Home() {
   return (
     <div className="Home">
       <div className="mood-selector">
+        Welcome {user?.given_name || "User"}
         <h2>Select Mood</h2>
         <select
           value={mood}
@@ -90,7 +95,6 @@ export default function Home() {
         </select>
         <i className={`${moodOptions[mood]}`}></i>
       </div>
-
       <div className="home-main">
         <h2>Music List</h2>
         <ul>
@@ -101,7 +105,9 @@ export default function Home() {
               <li
                 key={index}
                 onClick={() => playMusic(file)}
-                className={currentSong === file ? "active-song" : "inactive-song"}
+                className={
+                  currentSong === file ? "active-song" : "inactive-song"
+                }
               >
                 {file.split(".")[0]}
               </li>
@@ -109,7 +115,6 @@ export default function Home() {
           )}
         </ul>
       </div>
-
       <div className="player">
         <img
           src="https://tse4.mm.bing.net/th?id=OIP.W16wVtj9WrOJf8Eit9kQsQHaHa&pid=Api&P=0&h=180"

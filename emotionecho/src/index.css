@@ -1,10 +1,10 @@
 :root {
-  --dark-bg-color: #121212; /* Rich dark background */
-  --light-text-color: #e0e0e0; /* Light text for readability */
-  --primary-accent-color: #1db954; /* Vibrant green (Spotify-like) */
-  --secondary-accent-color: #f06292; /* Complementary pink */
-  --neutral-gray-color: #333333; /* Slightly lighter dark shade for cards/containers */
-  --hover-color: #1ed760; /* Brighter green for hover effects */
+  --dark-bg-color: #121212;
+  --light-text-color: #e0e0e0;
+  --primary-accent-color: #1db954;
+  --secondary-accent-color: #f06292;
+  --neutral-gray-color: #393b3c;
+  --hover-color: #1ed760;
   --font-size-base: 16px;
   --font-family: "Poppins, sans-serif";
 }
