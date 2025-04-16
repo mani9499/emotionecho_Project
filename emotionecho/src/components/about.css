@@ -1,0 +1,197 @@
+/* About Page Container */
+.about-container {
+  display: flex;
+  min-height: 100vh;
+  background: #121212; /* Dark background color */
+}
+
+/* About Content Styling */
+.about-content {
+  flex: 1;
+  padding: 2rem;
+  max-width: 800px;
+  margin: auto;
+  text-align: center;
+  color: #f0f0f0; /* Light text color */
+}
+
+h2 {
+  color: #f2f2f2; /* Lighter color for heading */
+  font-size: 2rem;
+}
+
+h3 {
+  color: #e0e0e0;
+  margin-top: 1.5rem;
+}
+
+p {
+  color: #ffffff;
+}
+
+/* Feature Cards Grid */
+.feature-cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 1.5rem;
+  margin-top: 1rem;
+}
+
+.feature-card {
+  padding: 1.5rem;
+  border-radius: 12px;
+  box-shadow: 0 4px 8px rgba(0, 115, 255, 0.2); /* Soft blue shadow */
+  text-align: center;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  overflow: hidden;
+  background: #1f1f1f; /* Default dark background */
+}
+
+/* Hover Effect on Feature Card */
+.feature-card:hover {
+  transform: translateY(-5px);
+  background-color: #333333; /* Slight darkening effect on hover */
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+}
+
+/* Specific Card Color for Each Feature */
+.feature-card:nth-child(1) {
+  background: #c27400; /* Emotion Detection - Orange */
+}
+
+.feature-card:nth-child(2) {
+  background: #4caf50; /* Personalized Playlists - Green */
+}
+
+.feature-card:nth-child(3) {
+  background: #2196f3; /* Seamless Experience - Blue */
+}
+
+.feature-card:nth-child(4) {
+  background: #9c27b0; /* Wide Music Library - Purple */
+}
+
+.feature-card:nth-child(5) {
+  background: #f44336; /* Emotion History - Red */
+}
+
+/* Hover Text Animation */
+.feature-card:hover h4,
+.feature-card:hover p {
+  animation: textAnimation 0.3s ease-in-out forwards;
+}
+
+/* Feature Icon Styling */
+.feature-icon {
+  font-size: 2rem;
+  margin-bottom: 10px;
+  color: white; /* White icon color */
+}
+
+.about-container h4 {
+  color: #fff; /* White color for the title inside the card */
+  margin-bottom: 10px;
+}
+
+.feature-card p {
+  font-size: 1rem;
+  color: #fff; /* White text for the description */
+}
+
+.feature-icon {
+  font-size: 2rem;
+  margin-bottom: 10px;
+  color: #ff9800; /* Bright color for the icons */
+}
+
+.about-container h4 {
+  color: #fff; /* White color for the title inside the card */
+  margin-bottom: 10px;
+}
+
+.feature-card p {
+  font-size: 1rem;
+  color: #b0b0b0; /* Slightly muted color for description */
+}
+
+/* Text Animation */
+@keyframes textAnimation {
+  0% {
+    transform: translateY(10px);
+    opacity: 0;
+  }
+  100% {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+/* Back Button Styling */
+.back-btn {
+  background-color: transparent;
+  color: #fff;
+  font-size: 18px;
+  font-weight: bold;
+  border: none;
+  cursor: pointer;
+  padding: 10px;
+  margin-bottom: 20px;
+  transition: background-color 0.3s, color 0.3s;
+}
+
+.back-btn:hover {
+  background-color: rgba(255, 255, 255, 0.2);
+  color: #ff6f61;
+}
+
+.back-btn:focus {
+  outline: none;
+}
+
+/* Active Song Styling */
+.music-item.active {
+  background: linear-gradient(135deg, #ff9800, #ff5722);
+  color: white;
+  padding: 15px;
+  text-align: center;
+  border-radius: 8px;
+  font-size: 1.2rem;
+  font-weight: bold;
+  cursor: pointer;
+  box-shadow: 0 0 10px rgba(255, 87, 34, 0.6);
+  transform: scale(1.1);
+  border: 2px solid #ffffff;
+  animation: glow 1.5s infinite alternate ease-in-out;
+}
+
+@keyframes glow {
+  0% {
+    box-shadow: 0 0 10px rgba(255, 87, 34, 0.6);
+  }
+  50% {
+    box-shadow: 0 0 20px rgba(255, 87, 34, 0.8);
+  }
+  100% {
+    box-shadow: 0 0 10px rgba(255, 87, 34, 0.6);
+  }
+}
+
+/* Responsive Design */
+@media (max-width: 1024px) {
+  .feature-cards {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+@media (max-width: 768px) {
+  .feature-cards {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 15px;
+  }
+}
+
+@media (max-width: 480px) {
+  .feature-cards {
+    grid-template-columns: repeat(1, 1fr);
+  }
+}

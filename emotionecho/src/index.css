@@ -1,9 +1,9 @@
 :root {
-  --dark-bg-color: #121212;
+  --dark-bg-color: #000000;
   --light-text-color: #e0e0e0;
   --primary-accent-color: #1db954;
   --secondary-accent-color: #f06292;
-  --neutral-gray-color: #393b3c;
+  --neutral-gray-color: #000000;
   --hover-color: #1ed760;
   --font-size-base: 16px;
   --font-family: "Poppins, sans-serif";
