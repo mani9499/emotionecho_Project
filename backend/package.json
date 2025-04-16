@@ -4,6 +4,7 @@
     "cors": "^2.8.5",
     "express": "^4.21.2",
     "fs": "^0.0.1-security",
+    "ml-kmeans": "^6.0.0",
     "sanitize-filename": "^1.6.3"
   }
 }
